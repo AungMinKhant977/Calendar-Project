@@ -1,0 +1,326 @@
+:root {
+    --primary: #3b82f6;
+    --primary-light: #DBEAFE;
+    --primary-dark: #1E3A8A;
+    --background: #F9F8FB;
+    --success: #d1fae5;
+    --success-text: #065f46;
+    --error: #fee2e2;
+    --error-text: #b91c1c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    background-color: var(--background);
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--primary);
+    color: #fff;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+
+/* Clock */
+.clock-container {
+    background-color: var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem;
+    text-align: center;
+    font-family: "Inter", sans-serif;
+    letter-spacing: 2px;
+    border-bottom: 2px solid var(--primary);
+}
+
+@media (max-width: 768px) {
+    .clock-container {
+        font-size: 1.4rem;
+        padding: 0.75rem;
+    }
+}
+
+/* Calendar Container */
+.calendar {
+    max-width: 1000px;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-btn-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.nav-btn {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--primary-dark);
+}
+
+.calendar-grid {
+    display: grid; /* Default to grid for larger screens */
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+/* Mobile grid */
+@media (max-width: 1024px) {
+    .calendar-grid {
+        display: flex; /* Use flexbox for horizontal scroll */
+        flex-wrap: nowrap;
+        overflow-x: auto; /* Add scrollbar if content overflows horizontally */
+        scroll-snap-type: x mandatory;
+        gap: 10px;
+        padding-bottom: 10px; /* Add some padding for scrollbar visibility */
+    }
+
+    .day, .day-name {
+        min-width: 140px; /* Ensure days have a minimum width */
+        flex-shrink: 0;
+        scroll-snap-align: start;
+    }
+}
+
+.day, .day-name {
+    text-align: center;
+}
+
+.day-name {
+    font-weight: bold;
+    padding: 8px 0;
+    color: var(--primary-dark);
+}
+
+.day {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    min-height: 100px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.day:hover {
+    background: #f3f4f6;
+}
+
+.day.today {
+    background: var(--primary-light);
+    border-color: var(--primary-dark);
+}
+
+.date-number {
+    font-weight: bold;
+    margin-bottom: 5px;
+    align-self: flex-end; /* Pushes the date number to the top-right if needed */
+}
+
+.events {
+    width: 100%; /* Ensure events container takes full width */
+    overflow: hidden; /* Hide overflow for too many events */
+}
+
+.event {
+    background-color: var(--primary);
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 4px;
+    margin-top: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.15s ease;
+}
+
+.event:hover {
+    transform: scale(1.03);
+}
+
+.event .course {
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.event .instructor {
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+.event .time {
+    font-size: 12px;
+    margin-top: 3px;
+    color: #f3f3f3;
+}
+
+/* Alert Boxes */
+.alert {
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.success {
+    background: var(--success);
+    color: var(--success-text);
+}
+
+.error {
+    background: var(--error);
+    color: var(--error-text);
+}
+
+/* Modal Pop-up */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: none; /* Initially hidden */
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 420px;
+    width: 90%; /* Adjust for smaller screens */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    position: relative; /* For close button positioning */
+}
+
+.modal-content label {
+    display: block;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 6px;
+}
+
+.modal-content input,
+.modal-content select { /* Added select to input styling */
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px; /* Add some space below inputs/select */
+}
+
+.modal-content button {
+    margin-top: 10px; /* Adjusted margin-top to separate from inputs */
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-content button[type="submit"] {
+    background-color: var(--primary);
+    color: white;
+}
+
+/* Corrected typo: subit-btn -> submit-btn and added delete-btn specific class */
+.submit-btn.delete-btn {
+    background-color: crimson;
+    color: #fff;
+}
+
+/* Added specific class for cancel button */
+.submit-btn.cancel-btn {
+    background-color: #e5e7eb;
+    color: #333;
+}
+
+
+/* Drop Down for multiple events */
+#eventSelectorWrapper {
+    display: none; /* Hidden by default, shown when multiple events for edit */
+    margin-bottom: 1rem;
+}
+
+#eventSelector {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-top: 0; /* Remove extra margin */
+    margin-bottom: 0; /* Remove extra margin */
+}
+
+/* Close button for modal */
+.modal-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #999;
+}
+
+.modal-content .close-button:hover {
+    color: #333;
+}
+
+
+/* Overlay Button CSS Logic */
+.day-overlay {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    gap: 4px;
+    z-index: 2;
+}
+
+.day:hover .day-overlay {
+    display: flex; /* Show on day hover */
+}
+
+.overlay-btn {
+    background: var(--primary-dark);
+    color: white;
+    padding: 4px 8px;
+    font-size: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.overlay-btn:hover {
+    background: var(--primary);
+}
